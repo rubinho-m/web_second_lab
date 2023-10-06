@@ -34,6 +34,7 @@ function mouseDownHandler(event) {
 
     let flagR = false;
     let chosenR
+
     for (let i = 0; i < R_arr.length; i++) {
         if (R_arr[i].checked) {
             flagR = true;
@@ -41,11 +42,12 @@ function mouseDownHandler(event) {
         }
     }
     if (flagR) { // R выбран
-        let divX = width / 2.55
-        let divY = height / 2.55
+        let divX = 100 * 2
+        let divY = 100 * 2
         let requestX = decartX / divX * chosenR
         let requestY = decartY / divY * chosenR
-        console.log(requestX, requestY)
+        // для R = 100 decartX, decartY
+        // console.log(requestX, requestY)
         let data = new URLSearchParams({
             x: requestX,
             y: requestY,
@@ -116,7 +118,6 @@ function mouseLeaveHandler(event) {
 document.addEventListener('DOMContentLoaded', function () {
 
     draw(chartColor)
-    console.log("Drawing chart")
 
 });
 
@@ -130,6 +131,7 @@ function draw(color) {
     // canvas.height = height;
 
     let points = []
+    let badPoints = []
     context.lineWidth = 2;
 
 
@@ -209,6 +211,10 @@ function draw(color) {
 
     let table = document.getElementsByTagName('table')[0]
     let rows = table.getElementsByTagName("tr")
+    let lastRow = rows[rows.length - 1]
+    let lastCells = lastRow.getElementsByTagName("td")
+    let lastR = lastCells[2].innerText;
+
     try {
         for (let i = 1; i < rows.length; i++) {
             let row = rows[i];
@@ -216,16 +222,25 @@ function draw(color) {
             let cellX = cells[0].innerText
             let cellY = cells[1].innerText
             let cellR = cells[2].innerText
-            let result = cells[3]
+            let result = cells[3].innerText
 
             let divX = width / 2.55
             let divY = height / 2.55
 
-            let drawX = cellX / cellR * divX + width / 2
-            let drawY = -(cellY / cellR * divY) + height / 2
+            let drawX, drawY
 
-            if (result) {
+            if (lastR != null){
+                drawX = cellX / lastR * divX + width / 2
+                drawY = -(cellY / lastR * divY) + height / 2
+            } else {
+                drawX = cellX / cellR * divX + width / 2
+                drawY = -(cellY / cellR * divY) + height / 2
+            }
+
+            if (result === 'true') {
                 points.push([drawX, drawY])
+            } else {
+                badPoints.push([drawX, drawY])
             }
 
 
@@ -237,6 +252,9 @@ function draw(color) {
 
     points.forEach(point => {
         drawPoint(context, point[0], point[1], 5, 'green')
+    })
+    badPoints.forEach(point => {
+        drawPoint(context, point[0], point[1], 5, 'red')
     })
 }
 
@@ -298,6 +316,8 @@ function checkPointInPolygon(point, vs) {
 }
 
 function checkPointInCircle(point, centerX, centerY, radius) {
+
+
     return (centerX - point[0]) ** 2 + (centerY - point[1]) ** 2 <= radius ** 2 && point[0] >= 0 && point[1] <= 0;
 }
 

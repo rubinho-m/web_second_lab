@@ -22,8 +22,8 @@
 
 
 .images {
-    background-image: url("images/bg2.jpg");
-    /*background-image: url("https://downloader.disk.yandex.ru/preview/8ab0cbce148c666d356f2eb3ef1632b7fb9554cd102079fa4f50d458fa03481d/650f4e50/lCuDN4_dd7awWDCPNzWmIrbyV6KLf768KGwZ_CZ3snk-rfsQt-q8po9tSVpxl0_52OXwqnYSXVXZYUbFYCFhKw%3D%3D?uid=0&filename=bg2.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048");*/
+    /*background-image: url("images/bg2.jpg");*/
+    background-image: url("https://downloader.disk.yandex.ru/preview/8ab0cbce148c666d356f2eb3ef1632b7fb9554cd102079fa4f50d458fa03481d/650f4e50/lCuDN4_dd7awWDCPNzWmIrbyV6KLf768KGwZ_CZ3snk-rfsQt-q8po9tSVpxl0_52OXwqnYSXVXZYUbFYCFhKw%3D%3D?uid=0&filename=bg2.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=0&tknv=v2&size=2048x2048");
     background-size: cover;
     background-repeat: no-repeat;
     flex: 4;

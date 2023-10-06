@@ -105,7 +105,7 @@ public class AreaCheckServlet extends HttpServlet {
     }
 
     private boolean isInCircle(double x, double y, double r) {
-        return x >= 0 && y <= 0 && x * x + y * y <= r * r;
+        return x >= 0 && y <= 0 && x * x + y * y <= r / 2 * r / 2;
     }
 
 
